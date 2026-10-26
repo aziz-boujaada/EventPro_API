@@ -2,6 +2,7 @@ package org.example.eventpro.Service;
 
 import org.example.eventpro.Domain.User;
 import org.example.eventpro.Enums.UserRole;
+import org.example.eventpro.Exception.ResourceNotFoundException;
 import org.example.eventpro.Repository.UserRepository;
 import org.example.eventpro.dto.CreateUserRequestDto;
 import org.example.eventpro.dto.UserResponseDto;
@@ -63,7 +64,7 @@ public class UserService {
 
     private User getUser(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     private void validateRoleFields(CreateUserRequestDto request) {

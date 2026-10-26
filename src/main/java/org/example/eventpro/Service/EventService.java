@@ -3,6 +3,7 @@ package org.example.eventpro.Service;
 import org.example.eventpro.Domain.Event;
 import org.example.eventpro.Domain.Organizer;
 import org.example.eventpro.Enums.EventStatus;
+import org.example.eventpro.Exception.ResourceNotFoundException;
 import org.example.eventpro.Repository.EventRepository;
 import org.example.eventpro.Repository.OrganizerRepository;
 import org.example.eventpro.dto.CreateEventRequestDto;
@@ -71,12 +72,12 @@ public class EventService {
 
     private Event getEvent(Long id) {
         return eventRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
     }
 
     private Organizer getOrganizer(Long id) {
         return organizerRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Organizer not found"));
     }
 
     private void validateDates(CreateEventRequestDto request) {
