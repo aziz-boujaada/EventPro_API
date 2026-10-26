@@ -51,7 +51,7 @@ public class Event {
     @Column(nullable = false)
     private EventStatus status;
 
-    @Column
+    @Column(nullable = false)
     private Integer capacity;
 
     @OneToMany(mappedBy = "event")
