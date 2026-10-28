@@ -1,6 +1,9 @@
 package org.example.eventpro.AdviceController;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.example.eventpro.Exception.DatesConflictsException;
+import org.example.eventpro.Exception.InvalidValueException;
+import org.example.eventpro.Exception.ResourceAlreadyExistException;
 import org.example.eventpro.Exception.ResourceNotFoundException;
 import org.example.eventpro.dto.ApiErrorResponseDto;
 import org.springframework.http.HttpStatus;
@@ -35,5 +38,32 @@ public class GlobalExceptionHandler {
             HttpServletRequest request
     ){
         return  buildResponse(request , HttpStatus.NOT_FOUND , exception.getMessage()) ;
+    }
+
+    /// handle invalid value exception
+    @ExceptionHandler(InvalidValueException.class)
+    public ResponseEntity<ApiErrorResponseDto> handleInvalidValue(
+            InvalidValueException exception,
+            HttpServletRequest request
+    ){
+        return buildResponse(request , HttpStatus.BAD_REQUEST , exception.getMessage());
+    }
+
+    /// handle dates conflicts exception
+    @ExceptionHandler(DatesConflictsException.class)
+    public ResponseEntity<ApiErrorResponseDto> handleDatesConflict(
+            InvalidValueException exception,
+            HttpServletRequest request
+    ){
+        return buildResponse(request , HttpStatus.BAD_REQUEST , exception.getMessage());
+    }
+
+    /// handle the resource already exist exception
+    @ExceptionHandler(ResourceAlreadyExistException.class)
+    public ResponseEntity<ApiErrorResponseDto> handleResourceAlreadyExist(
+            InvalidValueException exception,
+            HttpServletRequest request
+    ){
+        return buildResponse(request , HttpStatus.BAD_REQUEST , exception.getMessage());
     }
 }
