@@ -45,7 +45,7 @@ public class Reservation {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount;
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "reservation" , cascade = CascadeType.ALL , orphanRemoval = true)
     private List<ReservationLine> lines = new ArrayList<>();
 
     @OneToMany(mappedBy = "reservation")
