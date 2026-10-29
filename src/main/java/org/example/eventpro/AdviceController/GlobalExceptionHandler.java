@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
         return  ResponseEntity.status(status).body(apiErrorResponseDto);
     }
 
-    /// handle exception of user not found
+    /// handle resource not found exception
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiErrorResponseDto> handleResourceNotFound(
             ResourceNotFoundException exception,
@@ -55,15 +55,15 @@ public class GlobalExceptionHandler {
             InvalidValueException exception,
             HttpServletRequest request
     ){
-        return buildResponse(request , HttpStatus.BAD_REQUEST , exception.getMessage());
+        return buildResponse(request , HttpStatus.CONFLICT , exception.getMessage());
     }
 
     /// handle the resource already exist exception
     @ExceptionHandler(ResourceAlreadyExistException.class)
     public ResponseEntity<ApiErrorResponseDto> handleResourceAlreadyExist(
-            InvalidValueException exception,
+            ResourceAlreadyExistException exception,
             HttpServletRequest request
     ){
-        return buildResponse(request , HttpStatus.BAD_REQUEST , exception.getMessage());
+        return buildResponse(request , HttpStatus.CONFLICT , exception.getMessage());
     }
 }
